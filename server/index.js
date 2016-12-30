@@ -16,7 +16,9 @@ const clientBundleFileUrl = '/bundle.client.js'
 
 // Server-Side Rendering
 app.get('/', function(req, res) {
-  bundleRenderer.renderToString((err, html) => {
+  const context = {url: req.url}
+
+  bundleRenderer.renderToString(context, (err, html) => {
     console.log(html)
     if (err) {
       res.status(500).send(`
